@@ -1,22 +1,65 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/vuex-----test',
+    name: 'vuex',
+    component: () => import('../views/vuex/vuexIndex.vue')
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/zujianIndex-----test',
+    name: 'zujian',
+    component: () => import('../views/zujian/zujianIndex.vue')
+  },
+  {
+    path: '/redirect',
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect')
+      }
+    ]
+  },
+  {
+    path: '/',
+    name: 'login',
+    component: () => import('../views/login/index.vue')
+  },
+  {
+    path: '/main',
+    component: () => import('../components/main/index.vue'),
+    redirect: '/index',
+    children: [
+      {
+        path: '/index',
+        component: () => import('../views/index.vue'),
+        name: 'index'
+      },
+      {
+        path: '/files-file',
+        component: () => import('../views/files-file/index.vue'),
+        name: 'files-file'
+      },
+      {
+        path: '/files-images',
+        component: () => import('../views/files-images/index.vue'),
+        name: 'files-images'
+      },
+      {
+        path: '/pdf',
+        component: () => import('../views/pdf/index.vue'),
+        name: 'pdf'
+      }
+    ]
+  },
+  {
+    path: '/images-display',
+    component: () => import('../views/files-images/display.vue'),
+    name: 'images-display',
   }
 ]
 
